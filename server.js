@@ -6,13 +6,14 @@ const server = express();
 require('dotenv').config;
 server.use(cors());
 server.use(express.json());
-const PORT =3005;
+const PORT =process.env.PORT ||3005 ;
 const { default: axios } = require('axios');
 
 
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/Digimon', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(`mongodb://localhost:27017/Digimon`, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/test1', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB || 'mongodb://abrar:12345@cluster0-shard-00-00.bezrw.mongodb.net:27017,cluster0-shard-00-01.bezrw.mongodb.net:27017,cluster0-shard-00-02.bezrw.mongodb.net:27017/test1?ssl=true&replicaSet=atlas-wtxjwi-shard-0&authSource=admin&retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true });
+
 
 // http://localhost:3005
 server.get('/', (req, res) => {
@@ -74,7 +75,7 @@ function seedUser() {
 
 }
 
-seedUser();
+// seedUser();
  
 
 
